@@ -29,7 +29,7 @@ void UserTool::checkconnection(){
     signmanager->get(request);
 }
 
-void UserTool::login(QString user, QString password){
+void UserTool::login(QString user, QString pass){
     QNetworkRequest request;
     request.setUrl(QUrl("http://159.89.198.64:8086/user/login"));
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
