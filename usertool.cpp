@@ -43,7 +43,6 @@ void UserTool::signup(QString user, QString pass){
     request.setUrl(QUrl("http://159.89.198.64:8086/user/register"));
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
     QByteArray postdata;
-
     postdata.append(QString("username="+user+"&password="+pass));
     signmanager->post(request,postdata);
 }

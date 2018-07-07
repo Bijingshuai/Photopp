@@ -15,6 +15,10 @@ public:
     explicit registerDialog(QWidget *parent = 0);
     ~registerDialog();
 
+private slots:
+    void on_pushButton_clicked();
+    void signup(QString);
+
 private:
     Ui::registerDialog *ui;
 };

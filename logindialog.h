@@ -15,6 +15,11 @@ public:
     explicit logindialog(QWidget *parent = 0);
     ~logindialog();
 
+private slots:
+    void on_pushButton_clicked();
+    void login(QString);
+    void on_pushButton_3_clicked();
+
 private:
     Ui::logindialog *ui;
 };
