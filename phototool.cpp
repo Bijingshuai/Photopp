@@ -50,16 +50,17 @@ void PhotoTool::uploadPhoto(QString filepath){
     QNetworkRequest request;
     request.setUrl(QUrl("http://159.89.198.64:8086/image/upload"));
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
-    updownManager->post(request,postdata);
+
 
     connect(updownManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(uploadFinished(QNetworkReply*)));
+    updownManager->post(request,postdata);
 }
 
 void PhotoTool::uploadFinished(QNetworkReply *reply){
     int statuscode = reply->attribute(QNetworkRequest::HttpStatusCodeAttribute).toInt();
     QByteArray fromserver= reply->readAll();
     qDebug()<<statuscode;
-
+    qDebug()<<"上传"<<fromserver;
 
     QJsonParseError *error=new QJsonParseError;
     QJsonDocument doc=QJsonDocument::fromJson(fromserver,error);
@@ -75,39 +76,39 @@ void PhotoTool::uploadFinished(QNetworkReply *reply){
     if (!commmonVec.size())
         commmonVec.push_back(vector<Image>());
 
-        QString id = obj.value("id").toString();
-        QString location = obj.value("location").toString();
-        bool face = obj.value("face").toBool();
+    QString id = obj.value("id").toString();
+    QString location = obj.value("location").toString();
+    bool face = obj.value("face").toBool();
 
-        QFile::copy(path,QString("D:\\Users\\Photopp\\"+id+".jpg"));//修改路径
+    QFile::copy(path,QString("D:\\Users\\Photopp\\"+id+".jpg"));//修改路径
 
-        commmonVec[0].push_back(Image{id, location, face});
+    commmonVec[0].push_back(Image{id, location, face});
 
-        //locationVec
-        bool flag = false;
-        for (int index = 0, len = locationVec.size(); (index < len) && !flag; index++) {
-            if (!QString::compare(locationVec[index].at(0).location, location)) {
-                flag = true;
-                locationVec[index].push_back(Image{id, location, face});
-            }
+    //locationVec
+    bool flag = false;
+    for (int index = 0, len = locationVec.size(); (index < len) && !flag; index++) {
+         if (!QString::compare(locationVec[index].at(0).location, location)) {
+            flag = true;
+            locationVec[index].push_back(Image{id, location, face});
         }
-        if (!flag) {
-            locationVec.push_back(vector<Image>());
-            locationVec[locationVec.size()-1].push_back(Image{id, location, face});
-        }
+    }
+    if (!flag) {
+        locationVec.push_back(vector<Image>());
+        locationVec[locationVec.size()-1].push_back(Image{id, location, face});
+    }
 
-        //facevector
-        bool flag2=false;
-        for(int index = 0,len = faceVec.size(); (index<len) && !flag2; index++){
-            if(faceVec[index].at(0).face==face){
-                flag2 = true;
-                faceVec[index].push_back(Image{id,location,face});
-            }
+    //facevector
+    bool flag2=false;
+    for(int index = 0,len = faceVec.size(); (index<len) && !flag2; index++){
+        if(faceVec[index].at(0).face==face){
+            flag2 = true;
+            faceVec[index].push_back(Image{id,location,face});
         }
-        if(!flag2){
-            faceVec.push_back(vector<Image>());
-            faceVec[faceVec.size()-1].push_back(Image{id,location,face});
-        }
+    }
+    if(!flag2){
+        faceVec.push_back(vector<Image>());
+        faceVec[faceVec.size()-1].push_back(Image{id,location,face});
+    }
     vector<vector<vector<Image>>> vec;
     vec.push_back(commmonVec);
     vec.push_back(locationVec);
@@ -215,9 +216,10 @@ void PhotoTool::downloadPhoto(QNetworkReply *reply){
     request.setHeader(QNetworkRequest::ContentTypeHeader,"application/x-www-form-urlencoded");
     QByteArray postdata;
     postdata.append(QString("jwt="+jwtString));
+    connect(classifyManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(classification(QNetworkReply*)));
     classifyManager->post(request,postdata);
 
-    connect(classifyManager,SIGNAL(finished(QNetworkReply*)),this,SLOT(classification(QNetworkReply*)));
+
 }
 
 void PhotoTool::classification(QNetworkReply *reply){
@@ -279,9 +281,9 @@ void PhotoTool::classification(QNetworkReply *reply){
     vec.push_back(locationVec);
     vec.push_back(faceVec);
     emit imageVector(vec);
-
-    qDebug()<<commmonVec[0].at(0).id;
-    qDebug()<<locationVec.size();
+    emit downloadFinished();
+    //qDebug()<<commmonVec[0].at(0).id;
+   //qDebug()<<locationVec.size();
 
 }
 

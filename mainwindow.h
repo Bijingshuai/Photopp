@@ -28,6 +28,7 @@ public:
 public slots:
     void openDialog(QTableWidgetItem *item);
     void configWidget(vector<vector<vector<Image>>>);
+    void afterDownload();
 
 private slots:
     void on_upbtn_clicked();

@@ -48,6 +48,7 @@ public:
 
 signals:
     void imageVector(vector<vector<vector<Image>>>);
+    void downloadFinished();
 
 public slots:
     void uploadFinished(QNetworkReply*);
