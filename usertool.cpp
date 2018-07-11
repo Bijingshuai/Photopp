@@ -81,3 +81,7 @@ void UserTool::finishedslot(QNetworkReply *reply){
 
     reply->deleteLater();
 }
+
+QString UserTool::getjwt(){
+    return jwt;
+}

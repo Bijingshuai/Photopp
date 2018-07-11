@@ -10,9 +10,16 @@ class UserTool : public QObject
     Q_OBJECT
 
 public:
+
     explicit UserTool();
     ~UserTool();
 
+
+    static UserTool* getUserTool() {
+        static UserTool manager;
+        return &manager;
+    }//加入新的函数
+    QString getjwt();
     void checkconnection(/*QString,QString*/);
     void login(QString,QString);
     void signup(QString,QString);

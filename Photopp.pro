@@ -29,13 +29,17 @@ SOURCES += \
         mainwindow.cpp \
     usertool.cpp \
     logindialog.cpp \
-    registerdialog.cpp
+    registerdialog.cpp \
+    exif.cpp \
+    phototool.cpp
 
 HEADERS += \
         mainwindow.h \
     usertool.h \
     logindialog.h \
-    registerdialog.h
+    registerdialog.h \
+    exif.h \
+    phototool.h
 
 FORMS += \
         mainwindow.ui \
