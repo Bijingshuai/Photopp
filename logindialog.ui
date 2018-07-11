@@ -6,21 +6,33 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>459</width>
+    <height>459</height>
    </rect>
+  </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
   </property>
   <property name="windowTitle">
    <string>log in </string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">#logindialog{ border-image: url(:/new/prefix1/window.png);}</string>
+  </property>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>190</y>
+     <x>70</x>
+     <y>360</y>
      <width>80</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color: rgb(255, 255, 255);}
+QPushButton:hover{border:1px solid rgb(85, 170, 255);}
+QPushButton:pressed{border-top:2px solid rgb(0,0,0);
+border-left:2px solid rgb(0,0,0);border-right: rgb(255,255,255);border-bottom: rgb(255,255,255);}</string>
    </property>
    <property name="text">
     <string>log in</string>
@@ -29,11 +41,17 @@
   <widget class="QPushButton" name="pushButton_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>190</y>
+     <x>190</x>
+     <y>360</y>
      <width>80</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color: rgb(255, 255, 255);}
+QPushButton:hover{border:1px solid rgb(85, 170, 255);}
+QPushButton:pressed{border-top:2px solid rgb(0,0,0);
+border-left:2px solid rgb(0,0,0);border-right: rgb(255,255,255);border-bottom: rgb(255,255,255);}</string>
    </property>
    <property name="text">
     <string>log out</string>
@@ -42,24 +60,31 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>60</y>
-     <width>41</width>
+     <x>60</x>
+     <y>250</y>
+     <width>81</width>
      <height>16</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url();
+</string>
+   </property>
    <property name="text">
-    <string>user:</string>
+    <string>username:</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>100</y>
+     <x>60</x>
+     <y>300</y>
      <width>81</width>
      <height>16</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url();</string>
    </property>
    <property name="text">
     <string>password:</string>
@@ -69,33 +94,102 @@
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>50</y>
-     <width>121</width>
+     <y>240</y>
+     <width>201</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url();</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit_2">
    <property name="geometry">
     <rect>
      <x>150</x>
-     <y>90</y>
-     <width>121</width>
+     <y>290</y>
+     <width>201</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">border-image: url();</string>
    </property>
   </widget>
   <widget class="QPushButton" name="pushButton_3">
    <property name="geometry">
     <rect>
-     <x>250</x>
-     <y>190</y>
+     <x>320</x>
+     <y>360</y>
      <width>80</width>
      <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{background-color: rgb(255, 255, 255);}
+QPushButton:hover{border:1px solid rgb(85, 170, 255);}
+QPushButton:pressed{border-top:2px solid rgb(0,0,0);
+border-left:2px solid rgb(0,0,0);border-right: rgb(255,255,255);border-bottom: rgb(255,255,255);}</string>
+   </property>
    <property name="text">
     <string>register</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_4">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>290</y>
+     <width>31</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_5">
+   <property name="geometry">
+    <rect>
+     <x>390</x>
+     <y>5</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_6">
+   <property name="geometry">
+    <rect>
+     <x>430</x>
+     <y>6</y>
+     <width>21</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>
@@ -114,6 +208,38 @@
     <hint type="destinationlabel">
      <x>199</x>
      <y>149</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_5</sender>
+   <signal>clicked()</signal>
+   <receiver>logindialog</receiver>
+   <slot>showMinimized()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>400</x>
+     <y>12</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>197</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton_6</sender>
+   <signal>clicked()</signal>
+   <receiver>logindialog</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>440</x>
+     <y>13</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>229</x>
+     <y>197</y>
     </hint>
    </hints>
   </connection>

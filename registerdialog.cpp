@@ -7,6 +7,11 @@ registerDialog::registerDialog(QWidget *parent) :
     ui(new Ui::registerDialog)
 {
     ui->setupUi(this);
+    this->setWindowFlags(Qt::FramelessWindowHint);
+    ui->pushButton_3->setStyleSheet("QPushButton:enabled{border-image: url(:/new/prefix1/a.png)}"
+                                    "QPushButton:hover{border-image:url(:/new/prefix1/a1.png)}");
+    ui->pushButton_4->setStyleSheet("QPushButton:enabled{border-image: url(:/new/prefix1/b1.png)}"
+                                    "QPushButton:hover{border-image:url(:/new/prefix1/b.png)}");
 }
 
 registerDialog::~registerDialog()
@@ -32,4 +37,21 @@ void registerDialog::signup(QString a)
 else { QMessageBox::warning(this,tr("Warning"),
                             tr(s),
                             QMessageBox::Yes); accept();}
+}
+void registerDialog::mousePressEvent(QMouseEvent *e)
+{
+    last=e->globalPos();
+}
+void registerDialog::mouseMoveEvent(QMouseEvent *e)
+{
+    int dx=e->globalX()-last.x();
+    int dy=e->globalY()-last.y();
+    last=e->globalPos();
+    move(x()+dx,y()+dy);
+}
+void registerDialog::mouseReleaseEvent(QMouseEvent *e)
+{
+    int dx=e->globalX()-last.x();
+    int dy=e->globalY()-last.y();
+    move(x()+dx,y()+dy);
 }

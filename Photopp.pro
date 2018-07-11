@@ -41,3 +41,6 @@ FORMS += \
         mainwindow.ui \
     logindialog.ui \
     registerdialog.ui
+
+RESOURCES += \
+    eye.qrc
