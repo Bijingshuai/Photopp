@@ -8,5 +8,7 @@
         <file>a1.png</file>
         <file>b.png</file>
         <file>b1.png</file>
+        <file>up.png</file>
+        <file>up2.png</file>
     </qresource>
 </RCC>

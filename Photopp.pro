@@ -31,7 +31,8 @@ SOURCES += \
     logindialog.cpp \
     registerdialog.cpp \
     exif.cpp \
-    phototool.cpp
+    phototool.cpp \
+    dialog.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -39,12 +40,14 @@ HEADERS += \
     logindialog.h \
     registerdialog.h \
     exif.h \
-    phototool.h
+    phototool.h \
+    dialog.h
 
 FORMS += \
         mainwindow.ui \
     logindialog.ui \
-    registerdialog.ui
+    registerdialog.ui \
+    dialog.ui
 
 RESOURCES += \
     eye.qrc
