@@ -21,8 +21,13 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::afterLogin() {
     classifyType = 0;
     PhotoTool *photoTool = PhotoTool::getPhotoTool();
+    connect(photoTool, SIGNAL(imageVector(vector<vector<vector<Image> > >)), this, SLOT(configWidget(vector<vector<vector<Image> > >)));
+    connect(photoTool, SIGNAL(downloadFinished()), this, SLOT(afterDownload()));
     photoTool->confirmId();
-    QObject::connect(photoTool, SIGNAL(imageVector(vector<vector<vector<Image> > >)), this, SLOT(configWidget(vector<vector<vector<Image> > >)));
+}
+
+void MainWindow::afterDownload() {
+    this->show();
 }
 
 MainWindow::~MainWindow()
@@ -42,7 +47,7 @@ void MainWindow::openDialog(QTableWidgetItem*)
 void MainWindow::on_upbtn_clicked()
 {
     PhotoTool *photoTool = PhotoTool::getPhotoTool();
-    QString up_path=QFileDialog::getOpenFileName(this,tr("Open Image"),".",tr("Image Files(* .jpg * .png)"));
+    QString up_path=QFileDialog::getOpenFileName(this,tr("Open Image"),".",tr("Image Files(* .jpg)"));
     if(up_path.length()==0)
     {
         QMessageBox::information(NULL,tr("Path"),tr("You didn't select any files."));
@@ -50,8 +55,8 @@ void MainWindow::on_upbtn_clicked()
     else
     {
         QMessageBox::information(NULL,tr("Path"),tr("You selected")+up_path);
-        photoTool->uploadPhoto(up_path);
         connect(photoTool, SIGNAL(imageVector(vector<vector<vector<Image> > >)),this,SLOT(configWidget(vector<vector<vector<Image> > >)));
+        photoTool->uploadPhoto(up_path);
     }
 }
 
@@ -78,8 +83,7 @@ void MainWindow::configWidget(vector<vector<vector<Image> > >prama_vec)
                 for (int j = 0; j < 4; j++) {
                     QTableWidgetItem *item = new QTableWidgetItem();
                     ui->tableWidget->setItem(i+total, j, item);
-                    QString str = QString(path+commonVec[index].at(4*i+j).id+".jpg");
-                    item->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(str).scaled(60,60)));
+                    item->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(QString(path+commonVec[index].at(4*i+j).id+".jpg")).scaled(60,60)));
                     if (i == rows-1 && j ==commonVec[index].size()%4-1) {
                         break;
                     }
@@ -181,6 +185,7 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     classifyType = 1;//location
+     MainWindow::configWidget(vec);
      MainWindow::configWidget(vec);
 }
 
