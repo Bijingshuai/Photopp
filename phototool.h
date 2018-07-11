@@ -42,6 +42,9 @@ public:
     //void getLocationVector();
     //void getFaceVector();
 
+signals:
+    void imageVector(vector<vector<vector<Image>>>);
+
 public slots:
     void uploadFinished(QNetworkReply*);
     void downloadPhoto(QNetworkReply*);

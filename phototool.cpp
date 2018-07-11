@@ -108,7 +108,11 @@ void PhotoTool::uploadFinished(QNetworkReply *reply){
             faceVec.push_back(vector<Image>());
             faceVec[faceVec.size()-1].push_back(Image{id,location,face});
         }
-
+    vector<vector<vector<Image>>> vec;
+    vec.push_back(commmonVec);
+    vec.push_back(locationVec);
+    vec.push_back(faceVec);
+    emit imageVector(vec);
 }
 
 
@@ -268,9 +272,16 @@ void PhotoTool::classification(QNetworkReply *reply){
             faceVec[faceVec.size()-1].push_back(Image{id,location,face});
         }
 
-
     }
+
+    vector<vector<vector<Image>>> vec;
+    vec.push_back(commmonVec);
+    vec.push_back(locationVec);
+    vec.push_back(faceVec);
+    emit imageVector(vec);
+
     qDebug()<<commmonVec[0].at(0).id;
     qDebug()<<locationVec.size();
 
 }
+
