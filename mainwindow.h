@@ -23,6 +23,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    void afterLogin();
 
 public slots:
     void openDialog(QTableWidgetItem *item);
@@ -40,6 +41,8 @@ private slots:
 private:
     Ui::MainWindow *ui;
     vector<vector<vector<Image> > > vec;
+    int classifyType;
+    QString path;
 };
 
 class QPixmapItemdele : public QStyledItemDelegate

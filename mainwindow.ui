@@ -14,7 +14,7 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -38,14 +38,14 @@
          <item>
           <widget class="QPushButton" name="pushButton_2">
            <property name="text">
-            <string>人物</string>
+            <string>地点</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButton_3">
            <property name="text">
-            <string>地点</string>
+            <string>人物</string>
            </property>
           </widget>
          </item>

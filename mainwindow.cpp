@@ -13,10 +13,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     QApplication::setStyle("windows");
 
+    path = QString("D:\\Users\\Photopp\\");
 
 
+}
 
-
+void MainWindow::afterLogin() {
+    classifyType = 0;
+    PhotoTool *photoTool = PhotoTool::getPhotoTool();
+    photoTool->confirmId();
+    QObject::connect(photoTool, SIGNAL(imageVector(vector<vector<vector<Image> > >)), this, SLOT(configWidget(vector<vector<vector<Image> > >)));
 }
 
 MainWindow::~MainWindow()
@@ -36,15 +42,15 @@ void MainWindow::openDialog(QTableWidgetItem*)
 void MainWindow::on_upbtn_clicked()
 {
     PhotoTool *photoTool = PhotoTool::getPhotoTool();
-    QString path=QFileDialog::getOpenFileName(this,tr("Open Image"),".",tr("Image Files(*.jpg * .png)"));
-    if(path.length()==0)
+    QString up_path=QFileDialog::getOpenFileName(this,tr("Open Image"),".",tr("Image Files(* .jpg * .png)"));
+    if(up_path.length()==0)
     {
         QMessageBox::information(NULL,tr("Path"),tr("You didn't select any files."));
     }
     else
     {
-        QMessageBox::information(NULL,tr("Path"),tr("You selected")+path);
-        photoTool->uploadPhoto(path);
+        QMessageBox::information(NULL,tr("Path"),tr("You selected")+up_path);
+        photoTool->uploadPhoto(up_path);
         connect(photoTool, SIGNAL(imageVector(vector<vector<vector<Image> > >)),this,SLOT(configWidget(vector<vector<vector<Image> > >)));
     }
 }
@@ -53,39 +59,110 @@ void MainWindow::configWidget(vector<vector<vector<Image> > >prama_vec)
 {
     vec = prama_vec;
     ui->tableWidget->setItemDelegate(new QPixmapItemdele());
+    ui->tableWidget->clear();
+
+    if (classifyType == 0) {//common
+        vector<vector<Image>> commonVec = vec[0];
+        int groups = commonVec.size();
+        int total = 0;
+        for (int index = 0; index < groups; index++) {
+            int rows;
+            if (commonVec[index].size()%4 == 0) {
+                rows = commonVec[index].size()/4;
+            } else {
+                rows = commonVec[index].size()/4 + 1;
+            }
+
+            //set image
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < 4; j++) {
+                    QTableWidgetItem *item = new QTableWidgetItem();
+                    ui->tableWidget->setItem(i+total, j, item);
+                    QString str = QString(path+commonVec[index].at(4*i+j).id+".jpg");
+                    item->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(str).scaled(60,60)));
+                    if (i == rows-1 && j ==commonVec[index].size()%4-1) {
+                        break;
+                    }
+                }
+            }
+            total += rows;
+        }
+        ui->tableWidget->setRowCount(total);
+    } else if (classifyType == 1) {//location
+        vector<vector<Image>> locationVec = vec[1];
+        int groups = locationVec.size();
+        int total = 0;
+        for (int index = 0; index < groups; index++) {
+            QTextEdit *tb=new QTextEdit;
+            ui->tableWidget->setCellWidget(total,0,tb);
+            tb->setText(locationVec[index].at(0).location);
+            tb->setStyleSheet("border-style:outset");
+            total += 1;
+            int rows;
+            if (locationVec[index].size()%4 == 0) {
+                rows = locationVec[index].size()/4;
+            } else {
+                rows = locationVec[index].size()/4 + 1;
+            }
+
+            //set image
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < 4; j++) {
+                    QTableWidgetItem *item = new QTableWidgetItem();
+                    ui->tableWidget->setItem(i+total, j, item);
+                    QString str = QString(path+locationVec[index].at(4*i+j).id+".jpg");
+                    item->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(str).scaled(60,60)));
+                    if (i == rows-1 && j ==locationVec[index].size()%4-1) {
+                        break;
+                    }
+                }
+            }
+            total += rows;
+        }
+        ui->tableWidget->setRowCount(total);
+    } else if (classifyType == 2) {//face
+        vector<vector<Image>> faceVec = vec[2];
+        int groups = faceVec.size();
+        int total = 0;
+        for (int index = 0; index < groups; index++) {
+            if (faceVec[index].at(0).face == false)
+                continue;
+            int rows;
+            if (faceVec[index].size()%4 == 0) {
+                rows = faceVec[index].size()/4;
+            } else {
+                rows = faceVec[index].size()/4 + 1;
+            }
+
+            //set image
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < 4; j++) {
+                    QTableWidgetItem *item = new QTableWidgetItem();
+                    ui->tableWidget->setItem(i+total, j, item);
+                    QString str = QString(path+faceVec[index].at(4*i+j).id+".jpg");
+                    item->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(str).scaled(60,60)));
+                    if (i == rows-1 && j ==faceVec[index].size()%4-1) {
+                        break;
+                    }
+                }
+            }
+            total += rows;
+        }
+        ui->tableWidget->setRowCount(total);
+    } else {
+
+    }
 
 
-    int rowcount;
-    int colcount=4;
-    int width;
-    int a;
-    const char * b;
-    QTextEdit *tb=new QTextEdit;
-    ui->tableWidget->setCellWidget(a,0,tb);
-   ui->tableWidget->setRowHeight(a,100);
-   QString str(tr(b));
-   tb->setStyleSheet("border-style:outset");
-   for(int i=0; i<ui->tableWidget->columnCount(); i++)
-   {
-
-     ui->tableWidget->setColumnWidth(i,width);
-     for(int i=0;i<50;++i)
-      {
-       QTableWidgetItem *itemi = new QTableWidgetItem();
-       ui->tableWidget->setItem(0,i,itemi);
-       itemi->setData(Qt::DisplayRole,QVariant::fromValue<QPixmap>(QPixmap(":/new/prefix1/a.png").scaled(60,60)));
-       }
-
-}
     ui->tableWidget->setItemDelegate(new QPixmapItemdele());
 
-        ui->tableWidget->setColumnCount(colcount);
-        ui->tableWidget->setRowCount(rowcount);
+        ui->tableWidget->setColumnCount(4);
+
         ui->tableWidget->horizontalHeader()->setVisible(false);
         ui->tableWidget->verticalHeader()->setVisible(false);
         ui->tableWidget->setSelectionMode(ui->tableWidget->NoSelection);
         ui->tableWidget->setEditTriggers(ui->tableWidget->SelectedClicked);
-        ui->tableWidget->setShowGrid(true);
+        ui->tableWidget->setShowGrid(false);
         ui->tableWidget->setFrameShape(QFrame::NoFrame);
         ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
         ui->tableWidget->verticalHeader()->setSectionResizeMode(QHeaderView::Fixed);
@@ -93,19 +170,23 @@ void MainWindow::configWidget(vector<vector<vector<Image> > >prama_vec)
 connect(ui->tableWidget,SIGNAL(itemDoubleClicked(QTableWidgetItem*)),this,SLOT(openDialog(QTableWidgetItem*)));
 
 }
+
 void MainWindow::on_pushButton_clicked()
 {
+    classifyType = 0;//common
     MainWindow::configWidget(vec);
 }
 
 
 void MainWindow::on_pushButton_2_clicked()
 {
+    classifyType = 1;//location
      MainWindow::configWidget(vec);
 }
 
 
 void MainWindow::on_pushButton_3_clicked()
 {
+    classifyType = 2;//face
     MainWindow::configWidget(vec);
 }

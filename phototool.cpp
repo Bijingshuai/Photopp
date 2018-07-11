@@ -79,7 +79,7 @@ void PhotoTool::uploadFinished(QNetworkReply *reply){
         QString location = obj.value("location").toString();
         bool face = obj.value("face").toBool();
 
-        QFile::copy(path,QString("/Users/mac/Downloads/testphoto/"+id+".jpg"));//修改路径
+        QFile::copy(path,QString("D:\\Users\\Photopp\\"+id+".jpg"));//修改路径
 
         commmonVec[0].push_back(Image{id, location, face});
 
@@ -142,7 +142,7 @@ QString PhotoTool::readexif(QString filepath){
 
 
 void PhotoTool::confirmId(){
-    QDir dir("/Users/mac/Downloads/testphoto");//修改路径
+    QDir dir("D:\\Users\\Photopp\\");//修改路径
          dir.setFilter(QDir::Files | QDir::Hidden | QDir::NoSymLinks);
          dir.setSorting(QDir::Size | QDir::Reversed);
 
@@ -205,7 +205,7 @@ void PhotoTool::downloadPhoto(QNetworkReply *reply){
 
         QPixmap photoresult;
         photoresult.loadFromData(rebyte);
-        photoresult.save(QString("/Users/mac/Downloads/testphoto/"+id+".jpg"),0);//修改路径
+        photoresult.save(QString("D:\\Users\\Photopp\\"+id+".jpg"),0);//修改路径
 
     }
 

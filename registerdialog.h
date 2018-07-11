@@ -19,7 +19,7 @@ private slots:
     void on_pushButton_clicked();
     void signup(QString);
 
-    void on_pushButton_2_clicked();
+    //void on_pushButton_2_clicked();
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);

@@ -20,7 +20,7 @@ private slots:
     void login(QString);
     void on_pushButton_3_clicked();
     void on_pushButton_4_clicked();
-    void on_lineEdit_textEdited(const QString &arg1);
+  //  void on_lineEdit_textEdited(const QString &arg1);
 protected:
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
