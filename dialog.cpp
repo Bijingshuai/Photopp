@@ -1,5 +1,9 @@
 #include "dialog.h"
 #include "ui_dialog.h"
+#include"mainwindow.h"
+#include"usertool.h"
+#include"phototool.h"
+
 
 Dialog::Dialog(QWidget *parent) :
     QDialog(parent),
@@ -11,8 +15,7 @@ Dialog::Dialog(QWidget *parent) :
 Dialog::~Dialog()
 {
     delete ui;
-    QPixmap *pixmap=new QPixmap(":/new/prefix1/a.png");
-
+    QPixmap *pixmap=new QPixmap();
     pixmap->scaled(ui->label->size(),Qt::KeepAspectRatio);
     ui->label->setScaledContents(true);
     ui->label->setPixmap(*pixmap);

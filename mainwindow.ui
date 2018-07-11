@@ -65,7 +65,11 @@
         </layout>
        </item>
        <item>
-        <widget class="QTableWidget" name="tableWidget"/>
+        <widget class="QTableWidget" name="tableWidget">
+         <property name="styleSheet">
+          <string notr="true">QTableWidget::item{border :10px solid white}</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>

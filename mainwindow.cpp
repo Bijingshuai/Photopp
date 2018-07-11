@@ -190,3 +190,5 @@ void MainWindow::on_pushButton_3_clicked()
     classifyType = 2;//face
     MainWindow::configWidget(vec);
 }
+
+
