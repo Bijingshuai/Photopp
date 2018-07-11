@@ -35,7 +35,7 @@ logindialog::~logindialog()
 
 void logindialog::on_pushButton_clicked()
 {
-    UserTool *usertool=new UserTool();
+    UserTool *usertool=UserTool::getUserTool();
     usertool->login(ui->lineEdit->text(),ui->lineEdit_2->text());
     connect(usertool,SIGNAL(getserverdata(QString)),this,SLOT(login(QString)));
 }
