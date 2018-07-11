@@ -34,6 +34,10 @@ public:
     explicit PhotoTool();
     ~PhotoTool();
 
+    static PhotoTool* getPhotoTool() {
+        static PhotoTool tool;
+        return &tool;
+    }
 
     void uploadPhoto(QString);
     void confirmId();

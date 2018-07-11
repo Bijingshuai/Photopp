@@ -26,13 +26,20 @@ public:
 
 public slots:
     void openDialog(QTableWidgetItem *item);
+    void configWidget(vector<vector<vector<Image>>>);
 
 private slots:
     void on_upbtn_clicked();
 
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
 private:
     Ui::MainWindow *ui;
-    PhotoTool photoTool;
+    vector<vector<vector<Image> > > vec;
 };
 
 class QPixmapItemdele : public QStyledItemDelegate
